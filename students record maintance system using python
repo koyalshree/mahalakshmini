@@ -1,0 +1,196 @@
+class Student:
+    def _init_(self, name, dob, year, branch, reg_no, mobile, email, temp_address, perm_address,
+                 father_name, father_mobile, father_income, father_email, mother_name, mother_mobile,
+                 mother_income, mother_email, hostel_info, fees_paid, scholarships, aadhar_no, emis_no, umis_no):
+        self.name = name
+        self.dob = dob  # Date of Birth
+        self.year = year
+        self.branch = branch
+        self.reg_no = reg_no  # Registration Number
+        self.mobile = mobile
+        self.email = email
+        self.temp_address = temp_address
+        self.perm_address = perm_address
+        self.father_name = father_name
+        self.father_mobile = father_mobile
+        self.father_income = father_income
+        self.father_email = father_email
+        self.mother_name = mother_name
+        self.mother_mobile = mother_mobile
+        self.mother_income = mother_income
+        self.mother_email = mother_email
+        self.hostel_info = hostel_info  # Room number or day scholar transportation info
+        self.fees_paid = fees_paid
+        self.scholarships = scholarships
+        self.aadhar_no = aadhar_no
+        self.emis_no = emis_no
+        self.umis_no = umis_no
+
+    def _str_(self):
+        return (f"Student Name: {self.name}\n"
+                f"DOB: {self.dob}\n"
+                f"Year: {self.year}\n"
+                f"Branch: {self.branch}\n"
+                f"Registration No: {self.reg_no}\n"
+                f"Mobile: {self.mobile}\n"
+                f"Email: {self.email}\n"
+                f"Temporary Address: {self.temp_address}\n"
+                f"Permanent Address: {self.perm_address}\n"
+                f"Father's Name: {self.father_name}\n"
+                f"Father's Mobile: {self.father_mobile}\n"
+                f"Father's Income: {self.father_income}\n"
+                f"Father's Email: {self.father_email}\n"
+                f"Mother's Name: {self.mother_name}\n"
+                f"Mother's Mobile: {self.mother_mobile}\n"
+                f"Mother's Income: {self.mother_income}\n"
+                f"Mother's Email: {self.mother_email}\n"
+                f"Hostel Info: {self.hostel_info}\n"
+                f"Fees Paid: {self.fees_paid}\n"
+                f"Scholarships: {self.scholarships}\n"
+                f"Aadhar Number: {self.aadhar_no}\n"
+                f"EMIS Number: {self.emis_no}\n"
+                f"UMIS Number: {self.umis_no}\n")
+
+# Define the StudentRecordSystem class to manage the students
+class StudentRecordSystem:
+    def _init_(self):
+        self.students = {}
+
+    def add_student(self):
+        print("Enter Student Details:")
+        name = input("Student's Name: ")
+        dob = input("Student's Date of Birth (YYYY-MM-DD): ")
+        year = input("Student's Year (e.g., 1st Year, 2nd Year): ")
+        branch = input("Student's Branch: ")
+        reg_no = input("Student's Registration Number: ")
+        mobile = input("Student's Mobile Number: ")
+        email = input("Student's Email Address: ")
+        temp_address = input("Student's Temporary Address: ")
+        perm_address = input("Student's Permanent Address: ")
+        
+        # Father's details
+        father_name = input("Father's Name: ")
+        father_mobile = input("Father's Mobile Number: ")
+        father_income = input("Father's Income: ")
+        father_email = input("Father's Email Address: ")
+        
+        # Mother's details
+        mother_name = input("Mother's Name: ")
+        mother_mobile = input("Mother's Mobile Number: ")
+        mother_income = input("Mother's Income: ")
+        mother_email = input("Mother's Email Address: ")
+
+        # Hostel or Day Scholar details
+        hostel_info = input("Is student in hostel? If yes, enter Room No. Else, mention transportation mode: ")
+
+        # Fees and Scholarships
+        fees_paid = input("Student's Fees Paid: ")
+        scholarships = input("Does student have any scholarships? (Yes/No): ")
+
+        # Unique numbers
+        aadhar_no = input("Student's Aadhar Number: ")
+        emis_no = input("Student's EMIS Number: ")
+        umis_no = input("Student's UMIS Number: ")
+
+        # Create student object and store it in the system
+        student = Student(name, dob, year, branch, reg_no, mobile, email, temp_address, perm_address,
+                          father_name, father_mobile, father_income, father_email, mother_name, mother_mobile,
+                          mother_income, mother_email, hostel_info, fees_paid, scholarships, aadhar_no, emis_no, umis_no)
+        
+        self.students[reg_no] = student
+        print("Student record added successfully!")
+
+    def view_students(self):
+        if not self.students:
+            print("No student records found!")
+        else:
+            for student in self.students.values():
+                print(student)
+
+    def search_student(self):
+        reg_no = input("Enter Student's Registration Number to search: ")
+        student = self.students.get(reg_no)
+        if student:
+            print(student)
+        else:
+            print("Student not found!")
+
+    def delete_student(self):
+        reg_no = input("Enter Student's Registration Number to delete: ")
+        if reg_no in self.students:
+            del self.students[reg_no]
+            print("Student record deleted successfully!")
+        else:
+            print("Student not found!")
+
+    def update_student(self):
+        reg_no = input("Enter Student's Registration Number to update: ")
+        student = self.students.get(reg_no)
+        if student:
+            print("Leave fields empty to skip updating them.")
+            student.name = input(f"Student's Name ({student.name}): ") or student.name
+            student.dob = input(f"Date of Birth ({student.dob}): ") or student.dob
+            student.year = input(f"Year ({student.year}): ") or student.year
+            student.branch = input(f"Branch ({student.branch}): ") or student.branch
+            student.mobile = input(f"Mobile Number ({student.mobile}): ") or student.mobile
+            student.email = input(f"Email Address ({student.email}): ") or student.email
+            student.temp_address = input(f"Temporary Address ({student.temp_address}): ") or student.temp_address
+            student.perm_address = input(f"Permanent Address ({student.perm_address}): ") or student.perm_address
+            student.father_name = input(f"Father's Name ({student.father_name}): ") or student.father_name
+            student.father_mobile = input(f"Father's Mobile Number ({student.father_mobile}): ") or student.father_mobile
+            student.father_income = input(f"Father's Income ({student.father_income}): ") or student.father_income
+            student.father_email = input(f"Father's Email Address ({student.father_email}): ") or student.father_email
+            student.mother_name = input(f"Mother's Name ({student.mother_name}): ") or student.mother_name
+            student.mother_mobile = input(f"Mother's Mobile Number ({student.mother_mobile}): ") or student.mother_mobile
+            student.mother_income = input(f"Mother's Income ({student.mother_income}): ") or student.mother_income
+            student.mother_email = input(f"Mother's Email Address ({student.mother_email}): ") or student.mother_email
+            student.hostel_info = input(f"Hostel Info ({student.hostel_info}): ") or student.hostel_info
+            student.fees_paid = input(f"Fees Paid ({student.fees_paid}): ") or student.fees_paid
+            student.scholarships = input(f"Scholarships ({student.scholarships}): ") or student.scholarships
+            print("Student record updated successfully!")
+        else:
+            print("Student not found!")
+
+# Function to display the menu
+def display_menu():
+    print("\nStudent Record Maintenance System")
+    print("1. Add Student")
+    print("2. View All Students")
+    print("3. Search Student")
+    print("4. Delete Student")
+    print("5. Update Student")
+    print("6. Exit")
+
+# Main function to run the system
+def main():
+    system = StudentRecordSystem()
+    
+    while True:
+        display_menu()
+        choice = input("Enter your choice (1-6): ")
+        
+        if choice == '1':  # Add Student
+            system.add_student()
+        
+        elif choice == '2':  # View All Students
+            system.view_students()
+        
+        elif choice == '3':  # Search Student
+            system.search_student()
+        
+        elif choice == '4':  # Delete Student
+            system.delete_student()
+        
+        elif choice == '5':  # Update Student
+            system.update_student()
+        
+        elif choice == '6':  # Exit
+            print("Exiting the system...")
+            break
+        
+        else:
+            print("Invalid choice, please enter a valid option.")
+
+# Run the program
+if _name_ == "_main_":
+    main()
